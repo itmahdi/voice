@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!srtContent) {
                 throw new Error('زیرنویس خالی است. ممکن است گفتاری تشخیص داده نشده باشد.');
             }
-            
+
             const blob = new Blob([srtContent], { type: 'text/srt' });
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.style.display = 'block';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Frontend Error:', error);
-            // این خط اصلاح شد
+            // این خط اصلاح شده است
             updateStatus(خطا: ${error.message}, 'red');
         } finally {
             generateBtn.disabled = false;
