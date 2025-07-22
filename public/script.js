@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Frontend Error:', error);
             // این خط اصلاح شده است
-            updateStatus(خطا: ${error.message}, 'red');
+            updateStatus(`خطا: ${error.message}`, 'red');
         } finally {
             generateBtn.disabled = false;
         }
