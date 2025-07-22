@@ -1,0 +1,28 @@
+// این تابع تمام درخواست‌های POST را مدیریت می‌کند
+export async function onRequestPost(context) {
+  try {
+    const AI = context.env.AI;
+    const audioData = await context.request.arrayBuffer();
+
+    const response = await AI.run(
+      '@cf/openai/whisper',
+      {
+        audio: [...new Uint8Array(audioData)],
+        response_format: "srt"
+      }
+    );
+
+    return new Response(response, {
+      headers: { 'Content-Type': 'text/plain' }
+    });
+
+  } catch (error) {
+    console.error('Error in middleware:', error);
+    return new Response(error.message, { status: 500 });
+  }
+}
+
+// این تابع اجازه می‌دهد درخواست‌های دیگر (مثل بارگذاری صفحه) به فایل‌های استاتیک برسند
+export async function onRequest(context) {
+    return await context.next();
+}
