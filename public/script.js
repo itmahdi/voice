@@ -16,14 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStatus('در حال آپلود و پردازش... (این فرآیند ممکن است چند دقیقه طول بکشد)', '#ccc');
 
         try {
-            // درخواست به ریشه اصلی سایت ارسال می‌شود و _middleware.js آن را مدیریت می‌کند
             const response = await fetch('/', {
                 method: 'POST',
                 body: file,
             });
 
             if (!response.ok) {
-                // اگر سرور خطا برگرداند، متن خطا را نمایش می‌دهیم
                 const errorText = await response.text();
                 throw new Error(errorText || 'خطایی در پردازش رخ داد.');
             }
@@ -40,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Frontend Error:', error);
+            // این خط اصلاح شد
             updateStatus(خطا: ${error.message}, 'red');
         } finally {
             generateBtn.disabled = false;
